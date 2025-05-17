@@ -1,0 +1,27 @@
+HTML METADATA TEMPLATE
+
+<head>
+    <!-- Character encoding for universal character support -->
+    <meta charset="UTF-8">
+    
+    <!-- Responsive design for mobile and tablet support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Description for search engines and social media -->
+    <meta name="description" content="This is a sample webpage for learning HTML and web development.">
+    
+    <!-- Author of the page -->
+    <meta name="author" content="Your Name Here">
+    
+    <!-- Keywords (optional; not widely used for SEO anymore) -->
+    <meta name="keywords" content="HTML, web development, learning, tutorial">
+    
+    <!-- Page title (shown in browser tab and search engines) -->
+    <title>My Sample Web Page</title>
+    
+    <!-- Favicon (optional, shown in the browser tab) -->
+    <!-- <link rel="icon" href="images/favicon.ico" type="image/x-icon"> -->
+    
+    <!-- CSS stylesheet link (if any) -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
