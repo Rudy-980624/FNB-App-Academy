@@ -1,0 +1,99 @@
+What's Included:
+✅ Basic HTML structure
+
+✅ Inline CSS styling for layout and colors
+
+✅ JavaScript form submission alert
+
+✅ Semantic elements: <header>, <main>, <section>, <footer>
+_________________________________________________________________________________________________________________
+_________________________________________________________________________________________________________________
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- This specifies the character encoding for the HTML document -->
+  <meta charset="UTF-8">
+  
+  <!-- Makes the site mobile-responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title of the webpage (shows on browser tab) -->
+  <title>My Sample Webpage</title>
+
+  <!-- Link to external CSS (you can create a file named style.css) -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Inline CSS for demonstration */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      padding: 20px;
+    }
+    header, footer {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+    }
+    main {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- This is the header section, usually used for site name or navigation -->
+  <header>
+    <h1>Welcome to My Webpage</h1>
+    <p>This is a basic HTML template with comments and explanations.</p>
+  </header>
+
+  <!-- Main content area -->
+  <main>
+    <section>
+      <h2>About This Page</h2>
+      <p>This template is designed to help you understand the basic structure of an HTML document. You can modify and expand it as needed.</p>
+    </section>
+
+    <section>
+      <h2>Features</h2>
+      <ul>
+        <li>Responsive layout</li>
+        <li>Clean and simple styling</li>
+        <li>Semantic HTML elements</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Sample Form</h2>
+      <!-- A simple form with name and email inputs -->
+      <form>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" placeholder="Enter your name"><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" placeholder="Enter your email"><br><br>
+
+        <input type="submit" value="Submit">
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer section, usually contains copyright or contact -->
+  <footer>
+    <p>&copy; 2025 My Sample Website. All rights reserved.</p>
+  </footer>
+
+  <!-- Optional JavaScript (for interactivity) -->
+  <script>
+    // Example JS: Alert when form is submitted
+    document.querySelector("form").addEventListener("submit", function(e) {
+      e.preventDefault(); // Prevents the page from refreshing
+      alert("Form submitted! (Not really, this is a demo.)");
+    });
+  </script>
+</body>
+</html>
