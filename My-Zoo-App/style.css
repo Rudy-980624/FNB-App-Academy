@@ -198,3 +198,17 @@ textarea{
     margin: 12px 0;
     padding: 8px 0;
 }
+
+#yeah img{
+        display: block;
+    margin: auto;
+    height: auto;
+    padding-top: auto;
+    padding-bottom: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+}
