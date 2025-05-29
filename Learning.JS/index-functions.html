@@ -4,11 +4,14 @@
     </head>
     <body>
         <h1 id="heading" onclick="txtchange()">JavaScript</h1> <!-- This is a heading with an id "heading" and an onclick event that calls the txtchange function when clicked -->
-        <!-- The above line creates a heading with id "heading" and an onclick event that calls the txtchange function when clicked -->
-        <p id="paragraph1">Click the heading to change its text.</p> 
+        <p id="addition"></p> <!-- This is a paragraph with an id "addition" where the result of the addition will be displayed --> 
 
         <script>
-            function txtchange(){ // This function changes the text of the heading when called
+             nmbradd(13, 7); // This calls the nmbradd function with parameters 13 and 7 to perform addition
+             document.getElementById("addition").innerHTML = nmbradd(13, 7); // This sets the innerHTML of the paragraph with id "addition" to the result of the nmbradd function with parameters 13 and 7
+        // The above code calls the nmbradd function with parameters 13 and 7 and displays the result in the paragraph with id "addition"
+
+            function txtchange(){ // This function changes the text of the heading when called/Clicked
                 if(document.getElementById("heading").innerHTML=='JavaScript'){ // This checks if the current text of the heading is 'JavaScript'
                     document.getElementById("heading").innerHTML='IS AWESOME!' // If the condition is true, it changes the text of the heading to 'IS AWESOME!'
                 } 
@@ -16,7 +19,15 @@
                     document.getElementById("heading").innerHTML='JavaScript' // If the condition is false, it changes the text of the heading back to 'JavaScript'
                 }
             }
-         // The above code defines a function called txtchange that changes the text of the heading with id "heading" when it is clicked
+        // The above code defines a function called txtchange that changes the text of the heading with id "heading" when it is clicked
+            
+         function nmbradd(num1, num2){ // This function takes two parameters num1 and num2 and performs addition
+             document.getElementById("addition").innerHTML = num1 + num2; // It sets the innerHTML of the paragraph with id "addition" to the result of the addition of num1 and num2
+                // The above code defines a function called nmbradd that takes two numbers as parameters and displays their sum in the paragraph with id "addition"
+             return num1 + num2; // This returns the result of the addition of num1 and num2
+         }
+        // The above code defines a function called nmbradd that takes two numbers as parameters and returns their sum
+           
         </script>
         
       </body>

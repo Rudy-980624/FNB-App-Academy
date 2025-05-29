@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <p id="outputtxt"></p> <!-- This is a paragraph with an id "outputtext" where the output will be displayed -->
+
+        <script>
+            var someVariable = 100; // This declares a variable named someVariable and assigns it the value 50
+            someFunction();
+                function someFunction() {
+                    document.getElementById("outputtxt").innerHTML = someVariable; // This sets the innerHTML of the paragraph with id "outputtxt" to the value of someVariable
+                }
+            // The above code declares a variable named someVariable and assigns it the value 100
+            // It then calls the function someFunction, which sets the innerHTML of the paragraph with id "outputtxt" to the value of someVariable.
+            // This demonstrates the concept of variable scope in JavaScript, where the variable someVariable is accessible within the function someFunction.
+            // In this case, someVariable is declared in the global scope, making it accessible within the function someFunction.
+
+        </script>
+            
+      </body>
+</html>
