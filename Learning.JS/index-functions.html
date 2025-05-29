@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1 id="heading" onclick="txtchange()">JavaScript</h1> <!-- This is a heading with an id "heading" and an onclick event that calls the txtchange function when clicked -->
+        <!-- The above line creates a heading with id "heading" and an onclick event that calls the txtchange function when clicked -->
+        <p id="paragraph1">Click the heading to change its text.</p> 
+
+        <script>
+            function txtchange(){ // This function changes the text of the heading when called
+                if(document.getElementById("heading").innerHTML=='JavaScript'){ // This checks if the current text of the heading is 'JavaScript'
+                    document.getElementById("heading").innerHTML='IS AWESOME!' // If the condition is true, it changes the text of the heading to 'IS AWESOME!'
+                } 
+                else {
+                    document.getElementById("heading").innerHTML='JavaScript' // If the condition is false, it changes the text of the heading back to 'JavaScript'
+                }
+            }
+         // The above code defines a function called txtchange that changes the text of the heading with id "heading" when it is clicked
+        </script>
+        
+      </body>
+</html>

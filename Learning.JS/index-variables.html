@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1 id="heading1"></h1>
+        <p id="paragraph1"></p>
+        <p id="paragraph2"></p>
+        <p id="paragraph3"></p>
+
+        <script>         
+            //Variable declaration and assignment
+            var text1;
+            var text2;
+            var text3;
+
+            var numA;
+            var numB;
+
+            // Assigning values to the variables
+            text1 = "Hello World";
+            text2 = "Welcome to JavaScript ";
+            text3 = "This is a simple example of using variables in JavaScript.";
+
+            var numA = 13; // Assigning the value 13 to numA
+            var numB = 7; // Assigning the value 7 to numB
+            // The above lines declare variables text1, text2, text3, numA, and numB
+            // and assign them string and numeric values respectively.
+
+            // Displaying/Output the values of the variables in the HTML elements
+            document.getElementById("heading1").innerHTML = (text1); // Displaying the values in the heading with id "heading1"
+            // The above line changes the content of the heading with id "heading1"
+            document.getElementById("paragraph1").innerHTML = (text2 + text3); // Displaying the values in the paragraph with id "paragraph1"
+            // The above line changes the content of the paragraph with id "paragraph1" concatenating text2 and text3
+
+            document.getElementById("paragraph2").innerHTML = ("The answer is: " + numA * numB); // Displaying the result of the multiplication of numA and numB in the paragraph with id "paragraph2"
+            // The above line performs an arithmetic operation (multiplication) and displays the result in the paragraph
+            document.getElementById("paragraph3").innerHTML = ("The sum of " + numA + " x " + numB + " = " + (numA * numB)); // Displaying the result of the multiplication of numA and numB in the paragraph with id "paragraph3"
+            // The above line performs an arithmetic operation (addition) and displays the result in the paragraph
+        </script>
+      </body>
+</html>
