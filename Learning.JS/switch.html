@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <label for="weather">How's the weather today??? </label> <!-- Label for the weather select dropdown -->
+        <select id="weather" onchange="displayWeather()"> <!-- Dropdown for selecting weather conditions -->
+            <option value="sunny">Sunny</option> <!-- Option for sunny weather -->
+            <option value="rainy">Rainy</option> 
+            <option value="cloudy">Cloudy</option> 
+            <option value="snowy">Snowy</option> 
+            <option value="windy">Windy</option> 
+            <option value="stormy">Stormy</option> 
+            <option value="foggy">Foggy</option> 
+            <option value="hail">Hail</option> 
+            <option value="thunder">Thunder</option> 
+            <option value="tornado">Tornado</option> 
+        </select>
+        <a href="#" onclick="btnpressed()">Check Weather</a> <!-- Link that triggers the btnpressed function when clicked -->
+        <p id="outputText">Weather Advice: </p> <!-- Paragraph to display weather advice based on the selected weather condition -->
+
+        <script>
+            function btnpressed() { // Function to handle the button click event
+                var weatherSelect = document.getElementById("weather").value; // Get the selected weather condition from the dropdown
+                var advice;     // Variable to hold the advice based on the weather condition
+
+                switch (weatherSelect) { // Switch statement to determine the advice based on the selected weather condition 
+                    case "sunny":  // Case for sunny weather
+                        advice = "It's a beautiful day! Don't forget your sunglasses."; // Advice for sunny weather
+                        break; // Break to exit the switch statement after handling the sunny case
+                    case "rainy":
+                        advice = "Don't forget your umbrella!";
+                        break;
+                    case "cloudy":
+                        advice = "It might rain later, keep an eye on the sky.";
+                        break;
+                    case "snowy":
+                        advice = "Stay warm and drive safely!";
+                        break;
+                    case "windy":
+                        advice = "Hold onto your hat!";
+                        break;
+                    case "stormy":
+                        advice = "Stay indoors and stay safe!";
+                        break;
+                    case "foggy":
+                        advice = "Drive carefully, visibility is low.";
+                        break;
+                    case "hail":
+                        advice = "Seek shelter, hail can be dangerous!";
+                        break;
+                    case "thunder":
+                        advice = "Stay indoors during the storm.";
+                        break;
+                    case "tornado":
+                        advice = "Seek shelter immediately!";
+                        break;
+                    default:
+                        advice = "Weather not recognized.";
+                }
+                document.getElementById("outputText").innerHTML = "Weather Advice: " + advice; // Update the output paragraph with the advice based on the selected weather condition
+            }
+        </script>
+            
+      </body>
+</html>

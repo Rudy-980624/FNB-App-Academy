@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+        <p id="outputText"></p>
+
+        <script>
+            var txt1 = "10"; // String containing a number
+            var txt2 = "5";
+
+            var num1 = stringToNumber(txt1); // Convert txt1 to a number
+            var num2 = stringToNumber(txt2); // Convert txt2 to a number 
+
+//          document.getElementsById("outputText").innerHTML = txt1 + txt2; // This will concatenate the two strings, resulting in "45"
+//          document.getElementsById("outputText").innerHTML = txt1 - txt2; // This will convert the strings to numbers and subtract them, resulting in -1
+            // The above code demonstrates how JavaScript handles string concatenation and arithmetic operations with strings.
+            // In the first case, the strings are concatenated, while in the second case, they are treated as numbers for subtraction. This also applis to multiplication and division.
+            // This is bad practice, as it can lead to unexpected results if not handled properly.
+
+            //Rather use parseInt() or parseFloat() to convert strings to numbers before performing arithmetic operations.
+
+//          document.getElementById("outputText").innerHTML = num1 + num2; // This will now correctly add the two numbers, resulting in 9
+            // This also applies to multiplication and division, where you should convert strings to numbers before performing arithmetic operations.
+
+            if(isNaN(num1) || isNaN(num2)) { // Check if either num1 or num2 is NaN (Not a Number)
+                document.getElementById("outputText").innerHTML = "One or both of the inputs are not valid numbers."; // Display an error message if either input is not a valid number
+            } else {
+                document.getElementById("outputText").innerHTML = "The sum is: " + (num1 + num2); // Display the sum of num1 and num2 if both are valid numbers
+            }
+
+            function stringToNumber() {
+                var num1 = parseInt(txt1); // Convert txt1 to an integer
+                var num2 = parseInt(txt2); // Convert txt2 to an integer
+
+                document.getElementById("outputText").innerHTML = num1 + num2; // This will now correctly add the two numbers, resulting in 9
+            }
+            
+        </script>
+            
+      </body>
+</html>

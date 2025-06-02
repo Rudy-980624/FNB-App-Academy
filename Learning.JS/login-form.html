@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <p></p>Login Form </p>
+
+        <form>
+            <label for="usernameinput">Username:</label> <!-- Label for the username input field -->
+            <input type="text" id="usernameinput"/><br/><!-- Input field for the username -->
+
+            <label for="passwordinput">Password:</label> <!-- Label for the password input field -->
+            <input type="password" id="passwordinput"/> <!-- Input field for the password -->
+            <p id="message"></p> <!-- Paragraph to display messages like login success or failure -->
+            <br/><br/> <!-- Line break for spacing -->
+            <a href="#" onclick="verifyUser()">Log in</a> <!-- Link that triggers the verifyUser function when clicked -->
+        </form> 
+        <!-- The above code creates a simple login form with username and password fields, and a link to log in. -->
+
+        <script>
+            function verifyUser(){
+                var username =  document.getElementById("usernameinput").value; // Get the value of the username input field
+                var password = document.getElementById("passwordinput").value; // Get the value of the password input field
+
+                checkcreds(username, password); // Call the checkcreds function with the username and password as arguments
+            }
+            function checkcreds(username, password){ 
+                var systemUsername = "Percy"; // Predefined system username
+                var systemPassword = "1234"; // Predefined system password
+
+                if(username === systemUsername && password === systemPassword){
+                    document.getElementById("message").innerHTML = "Login successful!"; // Display success message if the username and password match the system credentials
+                } else {
+                    document.getElementById("message").innerHTML = "Invalid username or password."; // Display error message if the username or password does not match the system credentials
+                }
+            // The above function checks the entered username and password against predefined system credentials    
+            }
+        </script>
+            <!-- The above script defines two functions: verifyUser and checkcreds.
+            The verifyUser function retrieves the values from the username and password input fields and calls the checkcreds function with those values. The checkcreds function compares the input values with predefined system credentials and updates the message paragraph accordingly. -->
+      </body>
+</html>
