@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css"> <!-- Link to the CSS file for styling -->
+        <title>Calculator</title>
+    </head>
+
+    <body>
+        <table border="1" align="center"> <!-- Table for the calculator layout -->
+            <tr>
+                <td colspan="4">
+                    <input type="text" id="answerBox" value="0"/> <!-- Input field for the answer, initially set to 0 -->
+                </td> <!-- Input field spans 4 columns -->
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <input type="text" id="inputBox" value="0"/> <!-- Input field for the current expression, disabled for user input -->
+                </td>
+                <td onclick="btnClrPressed()">Clr</td> <!-- Clear button -->
+            </tr>
+            <tr>
+                <td onclick="digitBtnPressed(7)">7</td> <!-- Buttons for numbers and operations -->
+                <td onclick="digitBtnPressed(8)">8</td> <!-- Each button has a unique ID -->
+                <td onclick="digitBtnPressed(9)">9</td> <!-- Numbers 7, 8, 9 -->
+                <td>/</td> <!-- Division operator -->
+            </tr>
+            <tr>
+                <td onclick="digitBtnPressed(4)">4</td> <!-- Numbers 4, 5, 6 -->
+                <td onclick="digitBtnPressed(5)">5</td> <!-- Each button has a unique ID -->
+                <td onclick="digitBtnPressed(6)">6</td> <!-- Numbers 4, 5, 6 -->
+                <td>x</td> <!-- Multiplication operator -->
+            </tr>
+            <tr>
+                <td onclick="digitBtnPressed(1)">1</td> <!-- Numbers 1, 2, 3 -->
+                <td onclick="digitBtnPressed(2)">2</td> <!-- Each button has a unique ID -->
+                <td onclick="digitBtnPressed(3)">3</td> <!-- Numbers 1, 2, 3 -->
+                <td>-</td> <!-- Subtraction operator -->
+            </tr>
+            <tr>
+                <td onclick="digitBtnPressed(0)">0</td> <!-- Button for number 0 -->
+                <td>.</td> <!-- Decimal point button -->
+                <td>+</td> <!-- Addition operator -->
+                <td>=</td> <!-- Equals button -->
+            </tr>
+        </table>
+
+        <script>
+            var newline = "true"; // Variable to store newline character
+
+            function digitBtnPressed(button) { // Function to handle digit button presses
+
+                if(newline) { // Check if newline is true
+                    document.getElementById("inputBox").value = button; // Clear the input box if newline is true
+                    newline = false; // Set newline to false after the first button press
+                }
+                else { // If newline is false, append the button value to the input box
+                        var currentValue = document.getElementById("inputBox").value; // Get the current value in the input box
+                        document.getElementById("inputBox").value = currentValue + button; // Function to handle digit button presses
+                }
+            }
+            function btnClrPressed(){ // Function to handle the clear button press
+                document.getElementById("inputBox").value = 0; // Clear the input box
+                newline = true; // Reset newline to true
+            }
+
+        </script>
+    </body>
+
+</html>
