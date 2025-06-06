@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css"> <!-- Link to the CSS file for styling -->
+        <title>Calculator</title>
+    </head>
+
+    <body>
+        <table border="1" align="center"> <!-- Table for the calculator layout -->
+            <tr>
+                <td colspan="4">
+                    <input type="text" id="inputBox" value="0"/> <!-- Input field for the current expression, disabled for user input -->
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="clrBtn" onclick="clrBtnPressed()">Clr</td> <!-- Clear button -->
+            </tr>
+            <tr>
+                <td class="digitBtn" onclick="digitBtnPressed(7)">7</td> <!-- Buttons for numbers and operations -->
+                <td class="digitBtn" onclick="digitBtnPressed(8)">8</td> <!-- Each button has a unique ID -->
+                <td class="digitBtn" onclick="digitBtnPressed(9)">9</td> <!-- Numbers 7, 8, 9 -->
+                <td class="operatorBtn" onclick="operatorBtnPressed('/')">/</td> <!-- Division operator -->
+            </tr>
+            <tr>
+                <td class="digitBtn" onclick="digitBtnPressed(4)">4</td> <!-- Numbers 4, 5, 6 -->
+                <td class="digitBtn" onclick="digitBtnPressed(5)">5</td> <!-- Each button has a unique ID -->
+                <td class="digitBtn" onclick="digitBtnPressed(6)">6</td> <!-- Numbers 4, 5, 6 -->
+                <td class="operatorBtn" onclick="operatorBtnPressed('x')">x</td> <!-- Multiplication operator -->
+            </tr>
+            <tr>
+                <td class="digitBtn" onclick="digitBtnPressed(1)">1</td> <!-- Numbers 1, 2, 3 -->
+                <td class="digitBtn" onclick="digitBtnPressed(2)">2</td> <!-- Each button has a unique ID -->
+                <td class="digitBtn" onclick="digitBtnPressed(3)">3</td> <!-- Numbers 1, 2, 3 -->
+                <td class="operatorBtn" onclick="operatorBtnPressed('-')">-</td> <!-- Subtraction operator -->
+            </tr>
+            <tr>
+                <td colspan="2" class="operatorBtn" onclick="digitBtnPressed(0)">0</td> <!-- Button for number 0 -->
+                <td class="digitBtn" onclick="decimalBtnPressed()">.</td> <!-- Decimal point button -->
+                <td class="operatorBtn" onclick="operatorBtnPressed('+')">+</td> <!-- Addition operator -->
+                <td colspan="2" class="operatorBtn" onclick="equalBtnPressed()">=</td> <!-- Equals button -->
+            </tr>
+            
+            
+    </table>
+
+    <script>
+
+        var newline = true; // Variable to track if a new number should start
+
+        // Function to handle digit button presses
+        function digitBtnPressed(button) {
+            var inputBox = document.getElementById("inputBox"); // Get the input box element
+            if (newline || inputBox.value === "0") { // If starting new or input is zero
+                inputBox.value = button; // Set input to the pressed digit
+                newline = false; // Not a new line anymore
+            } else {
+                inputBox.value += button; // Append digit to current input
+            }
+        }
+
+        // Function to handle the clear button press
+        function clrBtnPressed() {
+            document.getElementById("inputBox").value = 0; // Reset input box to 0
+            newline = true; // Ready for new input
+        }
+
+        // Function to handle operator button presses
+        function operatorBtnPressed(operator) {
+            var inputBox = document.getElementById("inputBox"); // Get the input box element
+            // Replace 'x' with '*' for JavaScript evaluation
+            if (operator === 'x') {
+                inputBox.value += '*'; // Use '*' for multiplication
+            } else {
+                inputBox.value += operator; // Append operator to input
+            }
+            newline = false; // Not a new line anymore
+        }
+
+        // Function to handle the decimal button press
+        function decimalBtnPressed() {
+            var inputBox = document.getElementById("inputBox"); // Get the input box element
+            var currentValue = inputBox.value; // Get current value
+            // If starting a new number, start with "0."
+            if (newline) {
+                inputBox.value = "0.";
+                newline = false;
+            } else if (currentValue.indexOf('.') === -1) { // Only add decimal if not present
+                inputBox.value = currentValue + ".";
+            }
+        }
+
+        // Function to handle the equals button press
+        function equalBtnPressed() {
+            var expression = document.getElementById("inputBox").value; // Get the full expression
+            try {
+                var result = eval(expression); // Evaluate the expression
+                document.getElementById("inputBox").value = result; // Show result
+                newline = true; // Ready for new input
+            } catch (e) {
+                alert("Invalid expression!"); // Error handling
+                document.getElementById("inputBox").value = 0; // Reset input
+                newline = true;
+            }
+        }
+    </script>
+    </body>
+
+</html>

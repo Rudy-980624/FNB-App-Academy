@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css"> <!-- Link to the CSS file for styling -->
+        <title>Calculator</title>
+    </head>
+
+    <body>
+        <table border="1" align="center"> <!-- Table for the calculator layout -->
+            <tr>
+                <td colspan="4">
+                    <!-- Input field for the current expression, read-only for user typing -->
+                    <input type="text" id="inputBox" value="0" readonly />
+                </td>
+            </tr>
+            <tr>
+                <!-- Clear button spans three columns, operator on the right -->
+                <td colspan="3" class="clrBtn" onclick="clrBtnPressed()">Clr</td>
+                <td class="operatorBtn" onclick="operatorBtnPressed('/')">/</td>
+            </tr>
+            <tr>
+                <td class="digitBtn" onclick="digitBtnPressed(7)">7</td>
+                <td class="digitBtn" onclick="digitBtnPressed(8)">8</td>
+                <td class="digitBtn" onclick="digitBtnPressed(9)">9</td>
+                <td class="operatorBtn" onclick="operatorBtnPressed('x')">x</td>
+            </tr>
+            <tr>
+                <td class="digitBtn" onclick="digitBtnPressed(4)">4</td>
+                <td class="digitBtn" onclick="digitBtnPressed(5)">5</td>
+                <td class="digitBtn" onclick="digitBtnPressed(6)">6</td>
+                <td class="operatorBtn" onclick="operatorBtnPressed('-')">-</td>
+            </tr>
+            <tr>
+                <td class="digitBtn" onclick="digitBtnPressed(1)">1</td>
+                <td class="digitBtn" onclick="digitBtnPressed(2)">2</td>
+                <td class="digitBtn" onclick="digitBtnPressed(3)">3</td>
+                <td class="operatorBtn" onclick="operatorBtnPressed('+')">+</td>
+            </tr>
+            <tr>
+                <!-- 0 spans two columns, decimal and equals on the right -->
+                <td class="digitBtn" colspan="2" onclick="digitBtnPressed(0)">0</td>
+                <td class="digitBtn" onclick="decimalBtnPressed()">.</td>
+                <td class="operatorBtn" onclick="equalBtnPressed()">=</td>
+            </tr>
+        </table>
+
+        <script>
+            var newline = true; // Tracks if a new number/expression should start
+
+            // Function to handle digit button presses
+            function digitBtnPressed(button) {
+                var inputBox = document.getElementById("inputBox"); // Get the input box element
+                if (newline || inputBox.value === "0") { // If starting new or input is zero
+                    inputBox.value = button; // Set input to the pressed digit
+                    newline = false; // Not a new line anymore
+                } else {
+                    inputBox.value += button; // Append digit to current input
+                }
+            }
+
+            // Function to handle the clear button press
+            function clrBtnPressed() {
+                document.getElementById("inputBox").value = 0; // Reset input box to 0
+                newline = true; // Ready for new input
+            }
+
+            // Function to handle operator button presses
+            function operatorBtnPressed(operator) {
+                var inputBox = document.getElementById("inputBox"); // Get the input box element
+                // Replace 'x' with '*' for JavaScript evaluation
+                if (operator === 'x') {
+                    inputBox.value += '*'; // Use '*' for multiplication
+                } else {
+                    inputBox.value += operator; // Append operator to input
+                }
+                newline = false; // Not a new line anymore
+            }
+
+            // Function to handle the decimal button press
+            function decimalBtnPressed() {
+                var inputBox = document.getElementById("inputBox"); // Get the input box element
+                var currentValue = inputBox.value; // Get current value
+                // If starting a new number, start with "0."
+                if (newline) {
+                    inputBox.value = "0.";
+                    newline = false;
+                } else if (currentValue.indexOf('.') === -1) { // Only add decimal if not present
+                    inputBox.value = currentValue + ".";
+                }
+            }
+
+            // Function to handle the equals button press
+            function equalBtnPressed() {
+                var expression = document.getElementById("inputBox").value; // Get the full expression
+                try {
+                    var result = eval(expression); // Evaluate the expression
+                    document.getElementById("inputBox").value = result; // Show result
+                    newline = true; // Ready for new input
+                } catch (e) {
+                    alert("Invalid expression!"); // Error handling
+                    document.getElementById("inputBox").value = 0; // Reset input
+                    newline = true;
+                }
+            }
+        </script>
+    </body>
+</html>
