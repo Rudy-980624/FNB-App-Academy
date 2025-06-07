@@ -11,11 +11,12 @@ table {
 
 /* Style for the display input */
 #inputBox {
-    background: #111;
-    color: #fff;
-    border: none;
+    background: #222;
+    color: #0ff;
+    font-size: 2em;
+    border: 2px solid #444;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2) inset;
     width: 100%;
-    font-size: 1.5em;
     text-align: right;
     padding: 10px;
     border-radius: 5px;
@@ -25,9 +26,10 @@ table {
 /* Style for all buttons */
 td {
     padding: 0;
+    margin: 2px;
 }
 
-.digitBtn, .operatorBtn, .clrBtn {
+.digitBtn, .operatorBtn, .clrBtn, .sciBtn {
     cursor: pointer;
     padding: 20px 0;
     border: 1px solid #333;
@@ -63,3 +65,40 @@ td {
 .clrBtn:hover {
     background: #e53935;
 }
+
+/* Scientific buttons */
+.sciBtn {
+    background: #1976d2;
+    color: #fff;
+    font-weight: bold;
+}
+.sciBtn:hover {
+    background: #2196f3;
+}
+
+/* Active button state */
+.digitBtn:active, .operatorBtn:active, .clrBtn:active, .sciBtn:active {
+    filter: brightness(0.85);
+}
+
+/* Focused button state */
+.digitBtn:focus, .operatorBtn:focus, .clrBtn:focus, .sciBtn:focus {
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    table {
+        font-size: 1.2em;
+        width: 98vw;
+    }
+    #inputBox {
+        font-size: 1em;
+        padding: 6px;
+    }
+    .digitBtn, .operatorBtn, .clrBtn, .sciBtn {
+        padding: 12px 0;
+    }
+}
+

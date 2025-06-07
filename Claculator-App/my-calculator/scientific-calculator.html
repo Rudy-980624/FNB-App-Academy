@@ -1,0 +1,209 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Scientific Calculator</title>
+    </head>
+    <body>
+        <table border="1" align="center">
+            <tr>
+                <td colspan="4">
+                    <!-- Expression display (shows what the user is entering) -->
+                    <input type="text" id="expressionBox" value="" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <!-- Result display (shows the answer) -->
+                    <input type="text" id="inputBox" value="0" readonly />
+                </td>
+            </tr>
+            <!-- Scientific functions section (at the top) -->
+            <tr>
+                <td class="operatorBtn" onclick="sciFuncPressed('sin')">sin</td>
+                <td class="operatorBtn" onclick="sciFuncPressed('cos')">cos</td>
+                <td class="operatorBtn" onclick="sciFuncPressed('tan')">tan</td>
+                <td class="operatorBtn" onclick="sciFuncPressed('log')">log</td>
+            </tr>
+            <tr>
+                <td class="operatorBtn" onclick="sciFuncPressed('ln')">ln</td>
+                <td class="operatorBtn" onclick="sciFuncPressed('sqrt')">√</td>
+                <td class="operatorBtn" onclick="sciFuncPressed('pow')">^</td>
+                <td class="operatorBtn" onclick="sciFuncPressed('fact')">!</td>
+            </tr>
+            <tr>
+                <td class="operatorBtn" onclick="insertConstant('pi')">π</td>
+                <td class="operatorBtn" onclick="insertConstant('e')">e</td>
+                <td class="operatorBtn" onclick="digitBtnPressed('(')">(</td>
+                <td class="operatorBtn" onclick="digitBtnPressed(')')">)</td>
+            </tr>
+            <!-- Number pad and basic operators below -->
+            <tr>
+                <td colspan="3" class="clrBtn" onclick="clrBtnPressed()">Clr</td>
+                <td class="operatorBtn" onclick="operatorBtnPressed('/')">/</td>
+            </tr>
+            <tr>
+                <td class="digitBtn" onclick="digitBtnPressed(7)">7</td>
+                <td class="digitBtn" onclick="digitBtnPressed(8)">8</td>
+                <td class="digitBtn" onclick="digitBtnPressed(9)">9</td>
+                <td class="operatorBtn" onclick="operatorBtnPressed('x')">x</td>
+            </tr>
+            <tr>
+                <td class="digitBtn" onclick="digitBtnPressed(4)">4</td>
+                <td class="digitBtn" onclick="digitBtnPressed(5)">5</td>
+                <td class="digitBtn" onclick="digitBtnPressed(6)">6</td>
+                <td class="operatorBtn" onclick="operatorBtnPressed('-')">-</td>
+            </tr>
+            <tr>
+                <td class="digitBtn" onclick="digitBtnPressed(1)">1</td>
+                <td class="digitBtn" onclick="digitBtnPressed(2)">2</td>
+                <td class="digitBtn" onclick="digitBtnPressed(3)">3</td>
+                <td class="operatorBtn" onclick="operatorBtnPressed('+')">+</td>
+            </tr>
+            <tr>
+                <td class="digitBtn" colspan="2" onclick="digitBtnPressed(0)">0</td>
+                <td class="digitBtn" onclick="decimalBtnPressed()">.</td>
+                <td class="operatorBtn" onclick="equalBtnPressed()">=</td>
+            </tr>
+        </table>
+
+        <script>
+            var newline = true; // Tracks if a new number/expression should start
+
+            // Function to handle digit button presses
+            function digitBtnPressed(button) {
+                var inputBox = document.getElementById("inputBox");
+                var expressionBox = document.getElementById("expressionBox");
+                if (newline || inputBox.value === "0") {
+                    inputBox.value = button;
+                    newline = false;
+                } else {
+                    inputBox.value += button;
+                }
+                expressionBox.value = inputBox.value;
+            }
+
+            // Function to handle the clear button press
+            function clrBtnPressed() {
+                document.getElementById("inputBox").value = 0;
+                document.getElementById("expressionBox").value = "";
+                newline = true;
+            }
+
+            // Function to handle operator button presses
+            function operatorBtnPressed(operator) {
+                var inputBox = document.getElementById("inputBox");
+                var expressionBox = document.getElementById("expressionBox");
+                if (operator === 'x') {
+                    inputBox.value += '*';
+                    expressionBox.value += '*';
+                } else {
+                    inputBox.value += operator;
+                    expressionBox.value += operator;
+                }
+                newline = false;
+            }
+
+            // Function to handle the decimal button press
+            function decimalBtnPressed() {
+                var inputBox = document.getElementById("inputBox");
+                var expressionBox = document.getElementById("expressionBox");
+                var currentValue = inputBox.value;
+                if (newline) {
+                    inputBox.value = "0.";
+                    expressionBox.value = "0.";
+                    newline = false;
+                } else {
+                    var lastNumber = currentValue.split(/[\+\-\*\/\(\)\^]/).pop();
+                    if (lastNumber.indexOf('.') === -1) {
+                        inputBox.value = currentValue + ".";
+                        expressionBox.value = currentValue + ".";
+                    }
+                }
+            }
+
+            // Recursive factorial function
+            function factorial(n) {
+                if (n < 0) return NaN;
+                if (n === 0) return 1;
+                return n * factorial(n - 1);
+            }
+
+            // Advanced parser for factorials (supports numbers and parenthesis expressions)
+            function parseFactorials(expr) {
+                // Replace (expression)! with factorial(expression)
+                expr = expr.replace(/(\([^\(\)]+\))\!/g, function(match, group) {
+                    return 'factorial' + group;
+                });
+                // Replace number! with factorial(number)
+                expr = expr.replace(/(\d+(\.\d+)?)\!/g, function(match, number) {
+                    return 'factorial(' + number + ')';
+                });
+                return expr;
+            }
+
+            // Function to handle the equals button press
+            function equalBtnPressed() {
+                var expression = document.getElementById("inputBox").value;
+                var expressionBox = document.getElementById("expressionBox");
+
+                // Replace scientific functions with Math equivalents
+                expression = expression.replace(/sin\(/g, 'Math.sin(')
+                                       .replace(/cos\(/g, 'Math.cos(')
+                                       .replace(/tan\(/g, 'Math.tan(')
+                                       .replace(/log\(/g, 'Math.log10(')
+                                       .replace(/ln\(/g, 'Math.log(')
+                                       .replace(/sqrt\(/g, 'Math.sqrt(')
+                                       .replace(/\^/g, '**');
+
+                // Replace sin(x), cos(x), tan(x) with Math.sin(x * Math.PI / 180)
+                expression = expression.replace(/Math\.sin\(([^)]+)\)/g, 'Math.sin(($1)*Math.PI/180)');
+                expression = expression.replace(/Math\.cos\(([^)]+)\)/g, 'Math.cos(($1)*Math.PI/180)');
+                expression = expression.replace(/Math\.tan\(([^)]+)\)/g, 'Math.tan(($1)*Math.PI/180)');
+
+                // Handle factorials (numbers and parenthesis expressions)
+                expression = parseFactorials(expression);
+
+                try {
+                    var result = eval(expression);
+                    document.getElementById("inputBox").value = result;
+                    document.getElementById("expressionBox").value = ""; // Clear the expression display after calculation
+                    newline = true;
+                } catch (e) {
+                    alert("Invalid expression!");
+                    document.getElementById("inputBox").value = 0;
+                    document.getElementById("expressionBox").value = "";
+                    newline = true;
+                }
+            }
+
+            // Functions for scientific calculator features
+            function sciFuncPressed(func) {
+                var inputBox = document.getElementById("inputBox");
+                var expressionBox = document.getElementById("expressionBox");
+                if (func === 'sin' || func === 'cos' || func === 'tan' || func === 'log' || func === 'ln' || func === 'sqrt') {
+                    inputBox.value += func + '(';
+                    expressionBox.value += func + '(';
+                } else if (func === 'pow') {
+                    inputBox.value += '^';
+                    expressionBox.value += '^';
+                } else if (func === 'fact') {
+                    inputBox.value += '!';
+                    expressionBox.value += '!';
+                }
+            }
+
+            // Function to insert mathematical constants like π and e
+            function insertConstant(constant) {
+                var inputBox = document.getElementById("inputBox");
+                var expressionBox = document.getElementById("expressionBox");
+                if (constant === 'pi') {
+                    inputBox.value += Math.PI;
+                    expressionBox.value += 'π';
+                } else if (constant === 'e') {
+                    inputBox.value += Math.E;
+                    expressionBox.value += 'e';
+                }
+            }
+        </script>
+    </body>
+</html>
