@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Add Contact Form</title>
+    </head>
+    <body>
+        <br/>
+        <form id="editForm" onsubmit="return false;">
+            <label for="firstname">First Name:</label><br/>
+            <input type="text" id="firstname" name="firstname" required><br/>
+            <label for="lastname">Last Name:</label><br/>
+            <input type="text" id="lastname" name="lastname" required><br/>
+            <label for="mobile">Mobile:</label><br/>
+            <input type="text" id="mobile" name="mobile" required><br/>
+            <label for="email">Email:</label><br/>
+            <input type="email" id="email" name="email" required><br/>
+            <label for="avatar">Avatar:</label><br/>
+            <input type="file" id="avatar" name="avatar"><br/>
+            <button type="button" id="submit">Submit</button>
+            <button type="button" id="cancel">Cancel</button>
+        </form>
+        <br/>
+        <button id="homeLink" type="button">Back to Contacts</button>
+        
+        <script src="config.js"></script>
+        <script>
+
+            document.getElementById("submit").addEventListener("click", submitForm); // Add event listener to the submit button
+            document.getElementById("cancel").addEventListener("click", homeLink); // Add event listener to the cancel button
+            document.getElementById("homeLink").addEventListener("click", homeLink);
+
+         function submitForm(e) { // Function to handle form submission
+            e.preventDefault(); // Prevent the default form submission behavior
+
+            const form = new FormData(document.getElementById("editForm")); // Create a new FormData object from the form
+            form.append('apiKey', apiKey); // Append the API key to the form data
+
+            fetch(rootPath + "controller/insert-contact/", { // Make a POST request to the server
+                method: 'POST', // Set the request method to POST
+                headers: { // Set the request headers
+                    'Accept': 'application/json, *.*'
+                },
+                body: form // Set the request body to the form data
+            })
+            .then(function(response) { // Check if the response is ok
+                return response.text(); // Parse the response as text
+            })
+            .then(function(data) { // Handle the response data
+                if (data == "1") { // If the response is "success"
+                    alert("Contact added successfully!"); // Show a success message
+                     homeLink(); // Link Redirect to the contacts page
+                } else {
+                    alert("Error adding contact: " + data); // Show an error message
+                    homeLink(); // Redirect to the contacts page
+                }
+            })
+         } 
+         
+         function homeLink() { // Function to handle the home link click
+            window.open("index.html", "_self"); // Redirect to the contacts page
+         }
+        </script>
+    </body>
+</html>

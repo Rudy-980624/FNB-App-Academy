@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Contacts Book App</title>
+    </head>
+
+    <body onload="fetchContacts()">
+
+        <div id="table"> Loading Contacts...</div>
+        <button id="refresh" type="button">Refresh Contacts</button>
+        <button id="addContact" type="button">Add Contact</button>
+
+        <script src="config.js"></script>
+        <script>
+
+            document.getElementById("refresh").addEventListener("click", fetchContacts); // Add event listener to the refresh button re-using the fetchContacts function
+            document.getElementById("addContact").addEventListener("click", addContact); // Add event listener to the add contact button
+
+            function fetchContacts() { // Fetch contacts from the server
+                fetch(rootPath + "controller/get-contacts/") // Make a GET request to the server
+                .then(function(response) { // Check if the response is ok
+                    return response.json(); // Parse the response as JSON
+                })
+                .then(function(data) { // Handle the JSON data
+                    displayOutput(data); // Call the displayOutput function to display the contacts
+                    //console.log(data); // Log the data to the console //
+                })
+            }
+
+            function displayOutput(data) { // Display the contacts in a table format
+                output = "<table>";
+
+                    for(a in data){ // Loop through each contact
+                    // Display the avatar image, first name, and last name for each contact
+                    output += `
+                        <tr onclick="editContact('${data[a].id}')">
+                            <td><img src="${rootPath}controller/uploads/${data[a].avatar}" width="40" /></td> 
+                            <td><h5>${data[a].firstname}</h5></td>
+                            <td><h5>${data[a].lastname}</h5></td>
+                        </tr>
+                    `;
+                }
+                output += "</table>";
+                document.getElementById("table").innerHTML = output; // Set the inner HTML of the table div to the output
+            }
+
+            function addContact() { // Function to handle adding a contact
+                window.open("add-contact-form.html", "_self"); // Redirect to the add contact form page
+            }
+
+            function editContact(id){ // Function to handle editing a contact
+                window.open("edit-contact.html?Id=" + id, "_self"); // Redirect to the edit contact form page with the contact ID
+            }
+        </script>
+
+    </body>
+</html>

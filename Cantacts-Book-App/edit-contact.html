@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit Contact Form</title>
+    </head>
+    <body onload="getContacts()">
+        <div id="avatarImage"></div>
+        <form id="editForm">
+            <label for="firstname">First Name:</label><br/>
+            <input type="text" id="firstname" name="firstname" readonly><br/>
+
+            <label for="lastname">Last Name:</label><br/>
+            <input type="text" id="lastname" name="lastname" readonly><br/>
+
+            <label for="mobile">Mobile:</label><br/>
+            <input type="text" id="mobile" name="mobile" readonly><br/>
+
+            <label for="email">Email:</label><br/>
+            <input type="email" id="email" name="email" readonly><br/>
+
+            <label for="avatar" id="avatarLabel" hidden>Change Profile Image:</label><br/>
+            <input type="file" id="avatar" name="avatar" hidden><br/>
+
+            <button type="submit" id="submitForm" hidden>Submit</button>
+            <button type="cancel" id="cancelForm">Cancel</button>
+        </form>
+        <br/><br/>
+        <button id="homeLink" type="button">Back to Contacts</button>
+        <button id="editContact" type="button">Edit Contact</button>
+        <button id="deleteContact" type="button">Delete Contact</button>
+
+        <script src="config.js"></script>
+        <script>
+
+            var id = getId(); // Get the contact ID from the URL
+            document.getElementById("editContact").addEventListener("click", editContact); // Add event listener to the edit contact button
+            document.getElementById("homeLink").addEventListener("click", homelink); // Add event listener to the home link button 
+            console.log("The ID is: " + id); // Log the contact ID to the console
+
+            function getId(){ //
+                var url = window.location.href; // Get the current URL
+                var pos = url.search("=");
+                var id = url.slice(pos + 1); // Extract the contact ID from the URL
+                return id; // Return the contact ID
+            }
+
+            function getContacts() {
+                fetch(rootPath + 'controller/get-contact/?id=' + id) // Make a GET request to the server to fetch the contact details
+                .then(function(response) {
+                    return response.json(); // Parse the response as JSON
+                })
+                .then(function(data) {
+                    displayOutput(data); // Display the contact details in the form fields
+                    console.log(data); // Log the contact data to the console
+                })
+            }
+
+            function homelink() { // Function to handle the home link click
+                window.open("index.html", "_self"); // Redirect to the contacts page
+            }
+
+            function displayOutput(data) {
+                avatarImg = 
+                    `<img src="${rootPath}/controller/uploads/${data[0].avatar}" width="200" />`; // Set the avatar image source
+
+                document.getElementById("avatarImage").innerHTML = avatarImg; // Display the avatar image in the avatarImage div
+                document.getElementById("firstname").value = data[0].firstname; // Set the first name field
+                document.getElementById("lastname").value = data[0].lastname; // Set the last name field
+                document.getElementById("mobile").value = data[0].mobile; // Set the mobile field
+                document.getElementById("email").value = data[0].email; // Set the email field
+            }
+
+            function editContact() {
+                document.getElementById("firstname").readOnly = false; // Make the first name field editable
+                document.getElementById("lastname").readOnly = false; // Make the last name field editable
+                document.getElementById("mobile").readOnly = false; // Make the mobile field editable
+                document.getElementById("email").readOnly = false; // Make the email field editable
+                document.getElementById("avatar").hidden = false; // Show the avatar file input
+                document.getElementById("submitForm").hidden = false; // Show the submit button
+            }
+
+        </script>
+    </body>
+</html>
