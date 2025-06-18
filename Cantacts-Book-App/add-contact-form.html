@@ -30,7 +30,8 @@
             document.getElementById("cancel").addEventListener("click", homeLink); // Add event listener to the cancel button
             document.getElementById("homeLink").addEventListener("click", homeLink);
 
-         function submitForm(e) { // Function to handle form submission
+         function submitForm(e)
+          { // Function to handle form submission
             e.preventDefault(); // Prevent the default form submission behavior
 
             const form = new FormData(document.getElementById("editForm")); // Create a new FormData object from the form

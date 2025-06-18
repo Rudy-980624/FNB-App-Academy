@@ -1,0 +1,51 @@
+
+Python Terminal Commands for VS Code
+====================================
+
+✅ Python Environment Setup
+---------------------------
+python --version              # Check Python version
+python                        # Start Python REPL (interactive shell)
+python script.py              # Run a Python script
+
+✅ Virtual Environments
+-----------------------
+python -m venv venv           # Create virtual environment
+
+# Activate the virtual environment
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+
+deactivate                    # Deactivate virtual environment
+
+✅ Package Management
+---------------------
+pip install package_name           # Install a package
+pip uninstall package_name         # Uninstall a package
+pip freeze > requirements.txt      # Save installed packages to file
+pip install -r requirements.txt    # Install from requirements file
+
+✅ Project Navigation
+---------------------
+cd foldername        # Change directory
+ls or dir            # List files
+code .               # Open current directory in VS Code
+
+✅ Common Dev Tools
+-------------------
+pytest               # Run tests (if using pytest)
+black .              # Auto-format code with Black
+flake8               # Check code style (linting)
+
+# Install these tools if needed:
+pip install black flake8 pytest
+
+✅ Git Commands (Optional)
+--------------------------
+git init                   # Initialize Git repo
+git status                 # Check current status
+git add .                  # Add all changes
+git commit -m "message"    # Commit changes
+git push origin main       # Push to remote (after setting up remote)
