@@ -4,6 +4,7 @@
 
 my_tuples = (1, 2, 3, 4, 5)
 print(my_tuples)
+
 # Use Indexing to display specific element in tuple
 print(my_tuples[3]) 
 print(my_tuples[2])
